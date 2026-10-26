@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Discover books, events, and community programs at Greenwood Public Library." />
+  <title>Greenwood Public Library</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero-overlay {
+      background: linear-gradient(
+        90deg,
+        rgba(17, 35, 27, 0.88),
+        rgba(17, 35, 27, 0.45),
+        rgba(17, 35, 27, 0.1)
+      );
+    }
+
+    .nav-blur {
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .image-hover img {
+      transition: transform 0.6s ease;
+    }
+
+    .image-hover:hover img {
+      transform: scale(1.06);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *, *::before, *::after {
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="bg-[#f7f5ef] text-[#24372d]">
+
+  <header class="fixed top-0 z-50 w-full border-b border-white/20 bg-[#f7f5ef]/85 nav-blur">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-10">
+      <a href="#home" class="text-xl font-bold tracking-tight md:text-2xl">
+        Greenwood<span class="text-[#b27b48]">.</span>
+        <span class="block text-xs font-normal tracking-[0.25em]">PUBLIC LIBRARY</span>
+      </a>
+
+      <div class="hidden items-center gap-7 text-sm md:flex">
+        <a href="#about" class="hover:text-[#b27b48]">Our Story</a>
+        <a href="#categories" class="hover:text-[#b27b48]">Explore</a>
+        <a href="#events" class="hover:text-[#b27b48]">Events</a>
+        <a href="#membership" class="hover:text-[#b27b48]">Membership</a>
+        <a href="#contact" class="rounded-full bg-[#24372d] px-5 py-3 text-white transition hover:bg-[#b27b48]">
+          Visit Us ↗
+        </a>
+      </div>
+
+      <button id="menuButton"
+        class="rounded-lg border border-[#24372d]/20 px-3 py-2 md:hidden"
+        aria-label="Toggle navigation"
+        aria-expanded="false">
+        ☰
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="hidden border-t border-[#24372d]/10 px-5 py-4 md:hidden">
+      <div class="flex flex-col gap-4">
+        <a href="#about">Our Story</a>
+        <a href="#categories">Explore</a>
+        <a href="#events">Events</a>
+        <a href="#membership">Membership</a>
+        <a href="#contact">Visit Us</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="relative flex min-h-[90vh] items-center overflow-hidden bg-[#24372d]">
+      <img
+        src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&fit=crop&w=2000&q=85"
+        alt="Bookshelves inside a library"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+      <div class="hero-overlay absolute inset-0"></div>
+
+      <div class="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-36 text-white lg:px-10">
+        <p class="mb-6 text-xs uppercase tracking-[0.35em] text-[#e4bd8d]">
+          A place to discover · Since 1987
+        </p>
+
+        <h1 class="max-w-3xl text-5xl leading-[1.08] md:text-7xl lg:text-8xl">
+          Every book opens a <em class="text-[#e4bd8d]">new world.</em>
+        </h1>
+
+        <p class="mt-7 max-w-xl text-base leading-8 text-white/80 md:text-lg">
+          A welcoming home for curious minds, lifelong learners, and stories
+          waiting to be discovered.
+        </p>
+
+        <div class="mt-9 flex flex-wrap gap-4">
+          <a href="#categories"
+            class="rounded-full bg-[#e4bd8d] px-7 py-4 text-sm font-semibold text-[#24372d] transition hover:bg-white">
+            Explore the Library →
+          </a>
+          <a href="#about"
+            class="rounded-full border border-white/50 px-7 py-4 text-sm transition hover:bg-white/10">
+            Discover Our Story
+          </a>
+        </div>
+
+        <div class="mt-16 flex flex-wrap gap-10 border-t border-white/25 pt-7">
+          <div>
+            <p class="text-3xl">35k+</p>
+            <p class="mt-1 text-sm text-white/70">Books & resources</p>
+          </div>
+          <div>
+            <p class="text-3xl">2.4k+</p>
+            <p class="mt-1 text-sm text-white/70">Active members</p>
+          </div>
+          <div>
+            <p class="text-3xl">40+</p>
+            <p class="mt-1 text-sm text-white/70">Community events yearly</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="mx-auto grid max-w-7xl gap-12 px-6 py-24 md:grid-cols-2 md:items-center lg:px-10 lg:py-32">
+      <div class="reveal">
+        <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#a16d40]">More than a library</p>
+        <h2 class="text-4xl leading-tight md:text-6xl">
+          A little quiet.<br />
+          A lot of <em>possibility.</em>
+        </h2>
+        <p class="mt-7 leading-8 text-[#657268]">
+          We believe a library is more than shelves and pages. It is a place
+          where ideas grow, communities connect, and every visitor can find
+          something that changes the way they see the world.
+        </p>
+        <a href="#contact" class="mt-7 inline-block border-b border-[#b27b48] pb-2 text-sm font-semibold">
+          Get to know us ↗
+        </a>
+      </div>
+
+      <div class="reveal image-hover overflow-hidden rounded-[2rem]">
+        <img
+          src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?auto=format&fit=crop&w=1200&q=85"
+          alt="A peaceful reading area in a library"
+          class="h-[420px] w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </section>
+
+    <section id="categories" class="bg-[#eae8df] px-6 py-24 lg:px-10 lg:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#a16d40]">Find your next favourite</p>
+            <h2 class="text-4xl md:text-6xl">Explore our shelves.</h2>
+          </div>
+          <p class="max-w-md leading-7 text-[#657268]">
+            From timeless classics to new ideas, there is a corner of the
+            collection for every kind of reader.
+          </p>
+        </div>
+
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?auto=format&fit=crop&w=900&q=80"
+              alt="Fiction books" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">01 / Imagination</p>
+              <h3 class="mt-2 text-3xl">Fiction & Classics</h3>
+            </div>
+          </a>
+
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?auto=format&fit=crop&w=900&q=80"
+              alt="Books for learning" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">02 / Knowledge</p>
+              <h3 class="mt-2 text-3xl">Learning & Research</h3>
+            </div>
+          </a>
+
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1519682337058-a94d519337bc?auto=format&fit=crop&w=900&q=80"
+              alt="Books and creative inspiration" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">03 / Growth</p>
+              <h3 class="mt-2 text-3xl">Personal Growth</h3>
+            </div>
+          </a>
+
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=900&q=80"
+              alt="A collection of books" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">04 / Discovery</p>
+              <h3 class="mt-2 text-3xl">History & Culture</h3>
+            </div>
+          </a>
+
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=900&q=80"
+              alt="Study materials on a table" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">05 / Young minds</p>
+              <h3 class="mt-2 text-3xl">Children & Teens</h3>
+            </div>
+          </a>
+
+          <a href="#contact" class="reveal image-hover group relative h-80 overflow-hidden rounded-2xl">
+            <img src="https://images.unsplash.com/photo-1516979187457-637abb4f9353?auto=format&fit=crop&w=900&q=80"
+              alt="Books in a reading space" class="h-full w-full object-cover" loading="lazy" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+            <div class="absolute bottom-0 p-7 text-white">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#e4bd8d]">06 / Digital world</p>
+              <h3 class="mt-2 text-3xl">Digital Resources</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-28">
+      <div class="reveal mb-12 text-center">
+        <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#a16d40]">Your space, your pace</p>
+        <h2 class="text-4xl md:text-6xl">Room for every kind of reader.</h2>
+      </div>
+
+      <div class="grid gap-5 md:grid-cols-3">
+        <div class="reveal rounded-3xl bg-[#24372d] p-8 text-white md:col-span-2">
+          <p class="text-sm uppercase tracking-[0.2em] text-[#e4bd8d]">01 / Read</p>
+          <h3 class="mt-8 max-w-lg text-4xl md:text-5xl">Find a story that feels like yours.</h3>
+          <p class="mt-5 max-w-lg leading-7 text-white/70">
+            Browse a growing collection of books, discover new authors, and
+            revisit the classics you love.
+          </p>
+        </div>
+
+        <div class="reveal image-hover min-h-64 overflow-hidden rounded-3xl">
+          <img src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?auto=format&fit=crop&w=900&q=80"
+            alt="Reader enjoying a book" class="h-full w-full object-cover" loading="lazy" />
+        </div>
+
+        <div class="reveal image-hover min-h-64 overflow-hidden rounded-3xl">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=900&q=80"
+            alt="Students learning together" class="h-full w-full object-cover" loading="lazy" />
+        </div>
+
+        <div class="reveal rounded-3xl bg-[#e4bd8d] p-8 md:col-span-2">
+          <p class="text-sm uppercase tracking-[0.2em] text-[#5e482f]">02 / Connect</p>
+          <h3 class="mt-8 max-w-xl text-4xl md:text-5xl">Good ideas are even better together.</h3>
+          <p class="mt-5 max-w-xl leading-7 text-[#5e482f]">
+            Join reading circles, creative workshops, talks, and welcoming
+            community gatherings throughout the year.
+          </p>
+          <a href="#events" class="mt-7 inline-block border-b border-[#5e482f] pb-2 text-sm font-semibold">
+            Discover upcoming events ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="membership" class="bg-[#24372d] px-6 py-24 text-white lg:px-10 lg:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12 max-w-2xl">
+          <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#e4bd8d]">Become a member</p>
+          <h2 class="text-4xl leading-tight md:text-6xl">Make room for more.</h2>
+          <p class="mt-6 leading-7 text-white/70">
+            Find the membership that suits your reading habits and make the
+            library part of your everyday life.
+          </p>
+        </div>
+
+        <div class="grid gap-5 md:grid-cols-3">
+          <article class="reveal rounded-3xl border border-white/20 p-8">
+            <p class="text-sm text-[#e4bd8d]">01 / Essential</p>
+            <h3 class="mt-5 text-3xl">Reader</h3>
+            <p class="mt-4 text-4xl">Free</p>
+            <p class="mt-4 leading-7 text-white/70">For occasional readers and first-time visitors.</p>
+            <ul class="mt-7 space-y-3 text-sm text-white/80">
+              <li>✓ Library access</li>
+              <li>✓ Reading spaces</li>
+              <li>✓ Community events</li>
+            </ul>
+            <a href="#contact" class="mt-8 inline-block rounded-full border border-white/40 px-5 py-3 text-sm hover:bg-white/10">
+              Get Started
+            </a>
+          </article>
+
+          <article class="reveal rounded-3xl bg-[#e4bd8d] p-8 text-[#24372d]">
+            <p class="text-sm text-[#76522e]">02 / Most Popular</p>
+            <h3 class="mt-5 text-3xl">Enthusiast</h3>
+            <p class="mt-4 text-4xl">₹499<span class="text-base"> / year</span></p>
+            <p class="mt-4 leading-7 text-[#5e482f]">For curious minds who always have another book to read.</p>
+            <ul class="mt-7 space-y-3 text-sm">
+              <li>✓ Reader benefits</li>
+              <li>✓ Book borrowing privileges</li>
+              <li>✓ Event priority access</li>
+            </ul>
+            <a href="#contact" class="mt-8 inline-block rounded-full bg-[#24372d] px-5 py-3 text-sm text-white hover:bg-[#405747]">
+              Join Now
+            </a>
+          </article>
+
+          <article class="reveal rounded-3xl border border-white/20 p-8">
+            <p class="text-sm text-[#e4bd8d]">03 / Community</p>
+            <h3 class="mt-5 text-3xl">Family</h3>
+            <p class="mt-4 text-4xl">₹999<span class="text-base"> / year</span></p>
+            <p class="mt-4 leading-7 text-white/70">For families who love learning and reading together.</p>
+            <ul class="mt-7 space-y-3 text-sm text-white/80">
+              <li>✓ Family membership</li>
+              <li>✓ Children's activities</li>
+              <li>✓ Family reading sessions</li>
+            </ul>
+            <a href="#contact" class="mt-8 inline-block rounded-full border border-white/40 px-5 py-3 text-sm hover:bg-white/10">
+              Join Together
+            </a>
+          </article>
+        </div>
+        <p class="mt-5 text-xs text-white/50">Note: Membership plans and fees are sample content for this demo.</p>
+      </div>
+    </section>
+
+    <section class="px-6 py-24 lg:py-32">
+      <div class="reveal mx-auto max-w-4xl text-center">
+        <p class="text-xs uppercase tracking-[0.3em] text-[#a16d40]">Words from our community</p>
+        <p class="mt-8 text-3xl leading-relaxed md:text-5xl">
+          “The library has become my favourite place to slow down, discover
+          new ideas, and feel connected to my community.”
+        </p>
+        <div class="mt-8">
+          <p class="font-semibold">A Greenwood Member</p>
+          <p class="mt-1 text-sm text-[#657268]">Community testimonial placeholder</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="events" class="bg-[#eae8df] px-6 py-24 lg:px-10 lg:py-28">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
+          <div>
+            <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#a16d40]">Mark your calendar</p>
+            <h2 class="text-4xl md:text-6xl">Coming together.</h2>
+          </div>
+          <p class="max-w-md leading-7 text-[#657268]">
+            Conversations, creativity, and new discoveries are always on the agenda.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:grid-cols-3">
+          <article class="reveal overflow-hidden rounded-3xl bg-[#f7f5ef]">
+            <div class="image-hover h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1517486808906-6ca8b3f04846?auto=format&fit=crop&w=900&q=80"
+                alt="People participating in a group event" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#a16d40]">Community · Sample event</p>
+              <h3 class="mt-3 text-2xl">The Weekend Book Club</h3>
+              <p class="mt-3 leading-7 text-[#657268]">Bring your current read and join a relaxed conversation with fellow book lovers.</p>
+              <p class="mt-5 text-sm font-semibold">Saturday · 11:00 AM</p>
+            </div>
+          </article>
+
+          <article class="reveal overflow-hidden rounded-3xl bg-[#f7f5ef]">
+            <div class="image-hover h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80"
+                alt="Writing materials on a desk" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#a16d40]">Creative · Sample event</p>
+              <h3 class="mt-3 text-2xl">Creative Writing Workshop</h3>
+              <p class="mt-3 leading-7 text-[#657268]">Explore storytelling, develop your writing voice, and turn ideas into words.</p>
+              <p class="mt-5 text-sm font-semibold">Sunday · 2:00 PM</p>
+            </div>
+          </article>
+
+          <article class="reveal overflow-hidden rounded-3xl bg-[#f7f5ef]">
+            <div class="image-hover h-56 overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1529390079861-591de354faf5?auto=format&fit=crop&w=900&q=80"
+                alt="A group learning together" class="h-full w-full object-cover" loading="lazy" />
+            </div>
+            <div class="p-7">
+              <p class="text-xs uppercase tracking-[0.2em] text-[#a16d40]">Learning · Sample event</p>
+              <h3 class="mt-3 text-2xl">Learning Together</h3>
+              <p class="mt-3 leading-7 text-[#657268]">A welcoming session for sharing skills, asking questions, and learning something new.</p>
+              <p class="mt-5 text-sm font-semibold">Wednesday · 4:00 PM</p>
+            </div>
+          </article>
+        </div>
+        <p class="mt-5 text-xs text-[#657268]">Event names and times are illustrative placeholders.</p>
+      </div>
+    </section>
+
+    <section id="contact" class="px-6 py-24 lg:px-10 lg:py-28">
+      <div class="reveal mx-auto max-w-7xl overflow-hidden rounded-[2rem] bg-[#d8e0d4] p-8 md:p-14 lg:p-20">
+        <div class="grid gap-10 md:grid-cols-2 md:items-center">
+          <div>
+            <p class="mb-4 text-xs uppercase tracking-[0.3em] text-[#657268]">Your next chapter starts here</p>
+            <h2 class="text-4xl leading-tight md:text-6xl">Come in curious. Leave inspired.</h2>
+            <p class="mt-6 max-w-lg leading-7 text-[#526256]">
+              Whether you are looking for your next favourite book or a new
+              community to call your own, there is a place for you here.
+            </p>
+            <a href="mailto:hello@greenwoodlibrary.example"
+              class="mt-8 inline-block rounded-full bg-[#24372d] px-7 py-4 text-sm text-white transition hover:bg-[#405747]">
+              Get in Touch ↗
+            </a>
+          </div>
+
+          <div class="rounded-3xl bg-[#f7f5ef] p-8">
+            <h3 class="text-2xl">Plan your visit</h3>
+            <div class="mt-6 space-y-5 text-sm">
+              <div>
+                <p class="font-semibold">Address</p>
+                <p class="mt-1 text-[#657268]">123 Library Lane, Your City</p>
+              </div>
+              <div>
+                <p class="font-semibold">Opening hours</p>
+                <p class="mt-1 text-[#657268]">Monday – Saturday: 9 AM – 7 PM</p>
+                <p class="text-[#657268]">Sunday: 10 AM – 4 PM</p>
+              </div>
+              <div>
+                <p class="font-semibold">Email</p>
+                <p class="mt-1 text-[#657268]">hello@greenwoodlibrary.example</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="mt-6 text-xs text-[#657268]">Replace the sample address, hours, and email with your real details.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-[#1b2a21] px-6 py-12 text-white lg:px-10">
+    <div class="mx-auto flex max-w-7xl flex-col justify-between gap-8 md:flex-row md:items-end">
+      <div>
+        <a href="#home" class="text-2xl font-bold">Greenwood<span class="text-[#e4bd8d]">.</span></a>
+        <p class="mt-3 max-w-sm text-sm leading-6 text-white/60">
+          A welcoming space for stories, learning, and community.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-5 text-sm text-white/70">
+        <a href="#about" class="hover:text-white">Our Story</a>
+        <a href="#categories" class="hover:text-white">Explore</a>
+        <a href="#events" class="hover:text-white">Events</a>
+        <a href="#membership" class="hover:text-white">Membership</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+
+    <div class="mx-auto mt-10 flex max-w-7xl flex-col justify-between gap-3 border-t border-white/15 pt-6 text-xs text-white/50 sm:flex-row">
+      <p>© <span id="year"></span> Greenwood Public Library. Demo website.</p>
+      <a href="#home" class="hover:text-white">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.getElementById("menuButton");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuButton.addEventListener("click", () => {
+      const isExpanded = menuButton.getAttribute("aria-expanded") === "true";
+
+      menuButton.setAttribute("aria-expanded", String(!isExpanded));
+      mobileMenu.classList.toggle("hidden");
+    });
+
+    mobileMenu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuButton.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12
+      });
+
+      revealElements.forEach((element) => observer.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("visible"));
+    }
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
